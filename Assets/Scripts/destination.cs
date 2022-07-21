@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class destination : MonoBehaviour
 {
     [SerializeField]
-    private Text dropdownText;
+    private TMP_Text dropdownText;
     public SpriteRenderer passenger;
 
 
@@ -27,7 +28,7 @@ public class destination : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("player"))
+        if (collision.gameObject.name.Equals("Player"))
         {
             dropdownText.gameObject.SetActive(true);
             dropDownAllowed = true;
@@ -36,7 +37,7 @@ public class destination : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("player"))
+        if (collision.gameObject.name.Equals("Player"))
         {
             dropdownText.gameObject.SetActive(false);
             dropDownAllowed = false;

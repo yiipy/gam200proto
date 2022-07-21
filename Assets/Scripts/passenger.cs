@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class passenger : MonoBehaviour
 {
     [SerializeField]
-    private Text pickupText;
+    public TMP_Text pickupText;
 
     private bool pickUpAllowed;
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class passenger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("player"))
+        if (collision.gameObject.name.Equals("Player"))
         {
             pickupText.gameObject.SetActive(true);
             pickUpAllowed = true;
@@ -33,7 +34,7 @@ public class passenger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("player"))
+        if (collision.gameObject.name.Equals("Player"))
         {
             pickupText.gameObject.SetActive(false);
             pickUpAllowed = false;
