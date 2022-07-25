@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float chaseSpeed = 3f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     public float period = 0.1f;
     public int damage = 10;
     public GameObject Player;
+
+    public Transform[] waypoints;
+    private int currentWaypointIndex = 0;
+    private float patrolSpeed = 2f;
 
     private void Awake()
     {
@@ -45,7 +49,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerPrefs.GetInt("InRange") == 1)
+        if (PlayerPrefs.GetInt("InRange") == 0)
+        {
+            Transform wp = waypoints[currentWaypointIndex];
+            if (Vector3.Distance(transform.position, wp.position) < 0.01f)
+            {
+                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, wp.position, patrolSpeed * Time.deltaTime);
+            }
+        }
+
+        else if (PlayerPrefs.GetInt("InRange") == 1)
         {
             if (target)
             {
@@ -70,10 +87,15 @@ public class Enemy : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("InRange") == 1)
         {
+            chaseSpeed = 3f;
             if (target)
             {
-                rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
+                rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * chaseSpeed;
             }
-        } 
+        }
+        else
+        {
+            chaseSpeed = 0f;
+        }
     }
 }

@@ -21,6 +21,7 @@ public class ChaseCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerPrefs.SetInt("InRange", 1);
+            Debug.Log("Player in range");
         }
     }
 
@@ -29,6 +30,7 @@ public class ChaseCollider : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerPrefs.SetInt("InRange", 0);
+            Debug.Log("Player out of range");
         }
     }
 }
