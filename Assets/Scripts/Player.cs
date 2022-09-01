@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	public int currentHealth;
 	public HealthBar healthBar;
     public TMP_Text WeatherText;
+    public GameObject fog;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         if (other.tag == "fog")
         {
             WeatherText.text = "fog";
+            fog.SetActive(true);
         }
         if (other.tag == "rain")
         {
@@ -40,6 +42,15 @@ public class Player : MonoBehaviour
         if (other.tag == "windy")
         {
             WeatherText.text = "windy";
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "fog")
+        {
+            WeatherText.text = "fog";
+            fog.SetActive(false);
         }
     }
 }
