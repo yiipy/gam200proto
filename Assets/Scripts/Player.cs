@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
 	public int maxHealth = 100;
 	public int currentHealth;
-
 	public HealthBar healthBar;
-
+    public TMP_Text WeatherText;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,4 +22,24 @@ public class Player : MonoBehaviour
 
 		healthBar.SetHealth(currentHealth);
 	}
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "normal")
+        {
+            WeatherText.text = "normal";
+        }
+        if (other.tag == "fog")
+        {
+            WeatherText.text = "fog";
+        }
+        if (other.tag == "rain")
+        {
+            WeatherText.text = "rain";
+        }
+        if (other.tag == "windy")
+        {
+            WeatherText.text = "windy";
+        }
+    }
 }

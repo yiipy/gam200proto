@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - normal
+  - fog
+  - rain
+  - windy
   layers:
   - Default
   - TransparentFX
